@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Vector;
 
 public class Drawing extends JPanel {
     public class Painter extends Thread{
@@ -45,11 +46,21 @@ public class Drawing extends JPanel {
         run = false;
     }
 
+    Vector<Rect> rectangles = new Vector<>();
     public void paint(Graphics g) {
         g.setColor(background);
         g.fillRect(0,0, getWidth(), getHeight());
-        g.setColor(Color.blue);
-        g.fillRect(x,10, 100,100);
-        x++;
+
+        for (Rect rect : rectangles){
+            if(rect.borderOnly){
+                rect.drawBorder(g);
+            }else{
+                rect.fill(g);
+            }
+        }
+    }
+
+    public void clear(){
+        rectangles = new Vector<>();
     }
 }

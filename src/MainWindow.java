@@ -1,44 +1,49 @@
 import javax.swing.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class MainWindow extends JFrame {
-    public Drawing canvas;
+    public Drawing screen;
     public Input input;
 
-    public int fps = 1000 / 60;
+    public int fixedTime = 1000 / 60;
     public boolean run = true;
 
     public MainWindow(){
-        canvas = new Drawing();
-        canvas.setSize(400, 400);
-        canvas.setDoubleBuffered(true);
+        screen = new Drawing();
+        screen.setSize(400, 400);
+        screen.setDoubleBuffered(true);
 
         input = new Input();
 
         addKeyListener(input);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-        this.getContentPane().add(canvas);
+        this.getContentPane().add(screen);
 
-        canvas.startLoop();
+        screen.startLoop();
     }
 
     public void startLoop(){
         try{
             while (run){
+                screen.clear();
                 loop();
                 input.update();
-                Thread.sleep(fps);
+                Thread.sleep(fixedTime);
             }
         }catch (Exception e){
 
         }
     }
 
+    int x = 0;
     public void loop(){
+        Rect rect = new Rect(x,10, 50, 50);
+        screen.rectangles.add(rect);
+        x++;
+
         if(Input.getKeyDown(KeyEvent.VK_E)){
-            System.out.println("nibba");
+            x = 0;
         }
     }
 

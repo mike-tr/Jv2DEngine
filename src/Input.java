@@ -27,6 +27,7 @@ public class Input implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(!Pressed.contains(e.getKeyCode())){
+            Pressed.add(e.getKeyCode());
             AddList.add(e.getKeyCode());
         }
     }
@@ -34,17 +35,10 @@ public class Input implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         RemoveList.add(e.getKeyCode());
+        Pressed.removeElement(e.getKeyCode());
     }
 
     public void update(){
-        for (int i = 0; i < AddList.size(); i++) {
-            Pressed.add(AddList.get(i));
-            //System.out.println(AddList.get(i));
-        }
-        for (int i = 0; i < RemoveList.size(); i++) {
-            Pressed.remove(RemoveList.get(i));
-        }
-
         AddList = new Vector<>();
         RemoveList = new Vector<>();
     }
