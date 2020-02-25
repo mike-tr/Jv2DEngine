@@ -3,9 +3,6 @@ import java.awt.event.KeyListener;
 import java.util.Vector;
 
 public class Input implements KeyListener {
-    public boolean run = true;
-    public int delay = 10;
-
     static Vector<Integer> Pressed = new Vector<>();
     static Vector<Integer> RemoveList = new Vector<>();
     static Vector<Integer> AddList = new Vector<>();
