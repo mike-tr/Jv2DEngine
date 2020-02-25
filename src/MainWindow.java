@@ -38,9 +38,9 @@ public class MainWindow extends JFrame {
 
     int x = 0;
     public void loop(){
-        Rect rect = new Rect(x,10, 50, 50);
-        screen.rectangles.add(rect);
         x++;
+        Rect rect = new Rect(x,10, 50, 50);
+        screen.drawRect(rect);
 
         if(Input.getKeyDown(KeyEvent.VK_E)){
             x = 0;

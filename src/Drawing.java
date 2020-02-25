@@ -46,12 +46,14 @@ public class Drawing extends JPanel {
         run = false;
     }
 
-    Vector<Rect> rectangles = new Vector<>();
+    private Vector<Rect> rectanglesToDraw = new Vector<>();
     public void paint(Graphics g) {
         g.setColor(background);
         g.fillRect(0,0, getWidth(), getHeight());
 
-        for (Rect rect : rectangles){
+
+        for (int i = 0; i < rectanglesToDraw.size(); i++) {
+            Rect rect = rectanglesToDraw.get(i);
             if(rect.borderOnly){
                 rect.drawBorder(g);
             }else{
@@ -60,7 +62,11 @@ public class Drawing extends JPanel {
         }
     }
 
+    public void drawRect(Rect rect){
+        rectanglesToDraw.add(rect);
+    }
+
     public void clear(){
-        rectangles = new Vector<>();
+        rectanglesToDraw = new Vector<>();
     }
 }
